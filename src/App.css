@@ -1,0 +1,25 @@
+.App {
+    padding: 30px;
+    display: flex;
+}
+
+.App > div {
+    margin-right: 50px;
+}
+
+.is-done {
+    opacity: 0.4;
+    text-decoration: line-through;
+}
+
+.active {
+    background-color: cadetblue;
+}
+
+.error {
+    border: 1px solid red;
+    outline: none;
+}
+.error-message {
+    color: red;
+}
