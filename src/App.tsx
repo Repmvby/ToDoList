@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
+import AddItemForm from "./AddItemForm";
 
 export type TaskType = {
     id: string
@@ -73,6 +74,14 @@ function App() {
             task.isDone = isDone
             setTasks({...tasks})
         }
+    } function changeTaskTitle(taskID: string, newTitle: string, todoList_Id: string) {
+        const todoListTasks = tasks[todoList_Id]
+
+        const task = todoListTasks.find(t => t.id === taskID)
+        if (task) {
+            task.title = newTitle
+            setTasks({...tasks})
+        }
     }
 
     function changeTodoListFilter(newFilterValue: FilterValuesType, todoList_Id: string) {
@@ -83,9 +92,24 @@ function App() {
         }
     }
 
+    function changeTodoListTitle(newTitle:string, todoList_Id: string) {
+        const todoList = todoLists.find(tl => tl.id === todoList_Id)
+        if (todoList) {
+            todoList.title = newTitle
+            setTodoLists([...todoLists])
+        }
+    }
+
     function removeTodoList (todoList_Id: string) {
        setTodoLists(todoLists.filter(tl => tl.id !== todoList_Id))
         delete tasks[todoList_Id]
+    }
+
+    function addTodoList (title: string) {
+        const newTodoListId = v1()
+        const newTodoList: TodoListType= {id: newTodoListId, title: title, filter:'all'}
+        setTodoLists([...todoLists, newTodoList])
+        setTasks({...tasks,[newTodoListId]:[]})
     }
 
 
@@ -109,6 +133,8 @@ function App() {
                 changeTodoListFilter={changeTodoListFilter}
                 addTask={addTask}
                 changeTaskStatus={changeTaskStatus}
+                changeTaskTitle={changeTaskTitle}
+                changeTodoListTitle={changeTodoListTitle}
                 filter={tl.filter}
             />
 
@@ -117,6 +143,7 @@ function App() {
 
     return (
         <div className="App">
+            <AddItemForm addItem={addTodoList}/>
             {todoListsComponents}
         </div>
     );
