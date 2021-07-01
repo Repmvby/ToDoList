@@ -25,8 +25,8 @@ export function Todolist(props: TodoListPropsType) {
     const addTask = (title: string) => props.addTask(title, props.todoListID)
     const removeTodoList = () => props.removeTodoList(props.todoListID)
     const setAllFilter = () => props.changeTodoListFilter("all",props.todoListID)
-    const setActiveFilter = () => props.changeTodoListFilter("active", props.todoListID)
-    const setCompletedFilter = () => props.changeTodoListFilter("completed", props.todoListID)
+    const setActiveFilter = () => props.changeTodoListFilter( "active",props.todoListID)
+    const setCompletedFilter = () => props.changeTodoListFilter("completed",props.todoListID )
     const changeTodoListTitle = (title:string) => props.changeTodoListTitle(title, props.todoListID)
 
 
